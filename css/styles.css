@@ -1,0 +1,18 @@
+.heebo {
+  font-family: "Heebo", sans-serif;
+  letter-spacing: 1px;
+  color: rgb(63, 63, 63);
+}
+
+.form-header {
+  background-color: rgb(86, 21, 143);
+  color: white;
+}
+
+.form {
+  background-color: rgba(226, 226, 226, 0.692);
+}
+
+.padding {
+  padding: 0.5rem;
+}
