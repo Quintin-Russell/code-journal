@@ -9,15 +9,13 @@ $photoUrlDiv.addEventListener('input', function (e) {
   e.preventDefault();
   const $newURL = event.target.value;
   $img.setAttribute('src', $newURL);
-
 });
 
 // 2: event listener to 'submit' button; target: submit button, type: click
-const $submit = document.querySelector('.button');
 const $form = document.querySelector('#form');
 
-$submit.addEventListener('click', function (e) {
-  e.preventDefault();
+$form.addEventListener('submit', function (event) {
+  event.preventDefault();
   // put forms entries into new obj
   const $title = $form.elements.title.value;
   const $imgUrl = $img.getAttribute('src');
@@ -33,8 +31,10 @@ $submit.addEventListener('click', function (e) {
   entryArray.push(entry);
   // incriment nextEntryId
   entrynum++;
-  // form submits
-  $form.submit();
-  // reset img src att & form inputs
+  // save entryArray to localStorage
+  var entryArrayStr = JSON.stringify(entryArray);
+  localStorage.setItem('entryArray', entryArrayStr);
+  // reset img src att & form input
+  $img.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $form.reset();
 });
-// console.log(entryArray)
