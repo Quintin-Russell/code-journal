@@ -22,25 +22,27 @@
   </header>
   <main>
     <div data-view="entry-form" class="container row">
-    <div class="column flx33 padding heebo">
+    <div class="column form-input padding heebo row">
     <div class="padding form-header">Code Journal</div>
-    <form class="column flx33 form" action="">
+    <form class="column form" action="">
         <h1 class="padding">New Entry</h1>
-        <img class="padding" src="images/placeholder-image-square.jpg">
-        <div class="column padding">
+        <div class="img center padding">
+          <img src="images/placeholder-image-square.jpg" alt="placeholder-img">
+        </div>
+        <div class="form-input column padding">
           <label for="journal-title">Title</label>
-          <input type="text" id="journal-title" name="journal-title" required>
+          <input class="input" type="text" id="journal-title" name="journal-title" required>
         </div>
-        <div class="column padding">
+        <div class="column form-input padding">
           <label for="photo-url">Photo URL</label>
-          <input type="url" id="photo-url" name="photo-url" pattern="https://" placeholder="https://YourPhoto.com" required>
+          <input class="input" type="url" id="photo-url" name="photo-url" pattern="https://" placeholder="https://YourPhoto.com" required>
         </div>
-        <div class="column padding">
+        <div class="column form-input padding">
           <label for="notes">Notes</label>
-          <input type="textarea" id="notes" name="notes" placeholder="What's on your mind?" required>
+          <input class="input notes" type="textarea" id="notes" name="notes" required>
         </div>
         <div>
-          <button>SAVE</button>
+          <button class="input">SAVE</button>
         </div>
       </form>
     </div>

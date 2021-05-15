@@ -3,7 +3,7 @@
 }
 
 .container {
-  max-width: 575px;
+  width: 576px;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
@@ -16,6 +16,7 @@
 .column-full,
 .column-half {
   width: 100%;
+  padding: 0 0.75rem;
 }
 
 .column {
@@ -23,21 +24,30 @@
   flex-direction: column;
 }
 
-.flx33 {
-  flex-basis: calc(100% / 3);
-}
-
 @media screen and (min-width: 768px) {
   .container {
     max-width: 900px;
   }
+}
 
-  .column-full,
-  .column-half {
-    padding: 0 0.75rem;
-  }
+.column-half {
+  width: 50%;
+}
 
-  .column-half {
-    width: 50%;
-  }
+.img {
+  width: 80%;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+.input {
+  border-radius: 5%;
+  border: 0.25px solid black;
+}
+
+.form-input {
+  width: 33%;
 }
