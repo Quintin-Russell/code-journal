@@ -17,6 +17,23 @@
   padding: 0.5rem;
 }
 
+.input {
+  border-radius: 5%;
+  border: 0.25px solid rgb(136, 136, 136);
+  height: 2rem;
+}
+
+.input:focus {
+  outline-color: rgb(86, 21, 143);
+}
+
 .notes {
   height: 150px;
+}
+
+.button {
+  background-color: rgb(86, 21, 143);
+  color: white;
+  border-radius: 10%;
+  width: 100px;
 }

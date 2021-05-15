@@ -24,18 +24,13 @@
   flex-direction: column;
 }
 
-@media screen and (min-width: 768px) {
-  .container {
-    max-width: 900px;
-  }
-}
-
 .column-half {
   width: 50%;
 }
 
 .img {
-  width: 80%;
+  display: flex;
+  max-width: 100%;
 }
 
 .center {
@@ -43,11 +38,20 @@
   align-items: center;
 }
 
-.input {
-  border-radius: 5%;
-  border: 0.25px solid black;
+.width100 {
+  width: 100%;
 }
 
-.form-input {
-  width: 33%;
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 900px;
+    flex-basis: calc(100% / 3);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    width: 90%;
+    flex-basis: 90%;
+  }
 }

@@ -21,28 +21,28 @@
   <header>
   </header>
   <main>
-    <div data-view="entry-form" class="container row">
-    <div class="column form-input padding heebo row">
+    <div data-view="entry-form" class="container center row">
+    <div class="column padding heebo">
     <div class="padding form-header">Code Journal</div>
-    <form class="column form" action="">
-        <h1 class="padding">New Entry</h1>
+    <h1 class="padding">New Entry</h1>
+    <form id= "form" class="column center form" action="">
         <div class="img center padding">
-          <img src="images/placeholder-image-square.jpg" alt="placeholder-img">
+          <img class="img" src="images/placeholder-image-square.jpg" alt="placeholder-img">
         </div>
-        <div class="form-input column padding">
-          <label for="journal-title">Title</label>
-          <input class="input" type="text" id="journal-title" name="journal-title" required>
+        <div class="column padding width100">
+          <label for="title">Title</label>
+          <input class="input" type="text" id="title" name="title" required>
         </div>
-        <div class="column form-input padding">
-          <label for="photo-url">Photo URL</label>
-          <input class="input" type="url" id="photo-url" name="photo-url" pattern="https://" placeholder="https://YourPhoto.com" required>
+        <div class="column padding width100">
+          <label for="photourl">Photo URL</label>
+          <input class="input" type="url" id="photourl" name="photourl" placeholder="https://YourPhoto.com" required>
         </div>
-        <div class="column form-input padding">
+        <div class="column padding width100">
           <label for="notes">Notes</label>
           <input class="input notes" type="textarea" id="notes" name="notes" required>
         </div>
-        <div>
-          <button class="input">SAVE</button>
+        <div class="column width100">
+          <button type="submit" class="input button">SAVE</button>
         </div>
       </form>
     </div>
