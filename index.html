@@ -21,28 +21,29 @@
   <header>
   </header>
   <main>
-    <div data-view="entry-form" class="container center row">
-    <div class="column padding heebo">
+  <div class="container center row">
+    <div data-view="entry-form">
+    <div class="column-full heebo">
     <div class="padding form-header">Code Journal</div>
     <h1 class="padding">New Entry</h1>
 
-    <form id= "form" class="column center form row" action="">
-      <div class="img center padding column-half">
+    <form id= "form" class="center form row" action="">
+      <div class="img center column-half">
           <img class="img" src="images/placeholder-image-square.jpg" alt="placeholder-img">
-        </div>
+      </div>
 
         <div class="column-half">
-          <div class="column-full padding">
+          <div class="column-full">
             <label for="title">Title</label>
             <input class="input" type="text" id="title" name="title" required>
           </div>
-          <div class="column-full padding">
+          <div class="column-full">
             <label for="photourl">Photo URL</label>
             <input class="input" type="url" id="photourl" name="photourl" placeholder="https://YourPhoto.com" required>
           </div>
         </div>
 
-        <div class="column-full padding">
+        <div class="column-full">
           <label for="notes">Notes</label>
           <input class="input notes" type="textarea" id="notes" name="notes" required>
         </div>
@@ -54,7 +55,35 @@
 
     </div>
     </div>
+    </div>
 
+    <div data-view="entries" class="container center">
+      <ul class="center row no-padding">
+        <li>
+        <div class="padding heebo">
+          <div class="padding form-header">Code Journal</div>
+          <div class="row center sp-bw">
+            <h1 class="padding">Entries</h1>
+            <button class="input button">NEW</button>
+          </div>
+
+          <div class="center form row">
+
+            <div class="img center column-half">
+              <img class="img" src="images/placeholder-image-square.jpg" alt="placeholder-img">
+            </div>
+
+            <section class="column-half heebo">
+              <h2>Good Things</h2>
+              <p>SOmjksfdagfijsdbafijasbdfibaisdfjasdfas. asdhbfhuahasdfhu.sdjfbasdbu</p>
+            </section>
+        </div>
+
+        </div>
+        </li>
+      </ul>
+
+    </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>

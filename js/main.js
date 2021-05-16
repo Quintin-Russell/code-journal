@@ -20,14 +20,16 @@ $form.addEventListener('submit', function (event) {
   const $title = $form.elements.title.value;
   const $imgUrl = $img.getAttribute('src');
   const $text = $form.elements.notes.value;
+  const $date = Date.now();
 
   var entry = {
     entryID: entrynum,
     title: $title,
     imgURL: $imgUrl,
-    notes: $text
+    notes: $text,
+    date: $date
   };
-  entryArray.push(entry);
+  entryArray.unshift(entry);
   // incriment nextEntryId
   entrynum++;
   // save entryArray to localStorage
