@@ -20,8 +20,7 @@ $form.addEventListener('submit', function (event) {
   const $title = $form.elements.title.value;
   const $imgUrl = $img.getAttribute('src');
   const $text = $form.elements.notes.value;
-  // console.log("imgUrl", $imgUrl)
-  // console.log("title", $title)
+
   var entry = {
     entryID: entrynum,
     title: $title,

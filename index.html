@@ -25,26 +25,33 @@
     <div class="column padding heebo">
     <div class="padding form-header">Code Journal</div>
     <h1 class="padding">New Entry</h1>
-    <form id= "form" class="column center form" action="">
-        <div class="img center padding">
+
+    <form id= "form" class="column center form row" action="">
+      <div class="img center padding column-half">
           <img class="img" src="images/placeholder-image-square.jpg" alt="placeholder-img">
         </div>
-        <div class="column padding width100">
-          <label for="title">Title</label>
-          <input class="input" type="text" id="title" name="title" required>
+
+        <div class="column-half">
+          <div class="column-full padding">
+            <label for="title">Title</label>
+            <input class="input" type="text" id="title" name="title" required>
+          </div>
+          <div class="column-full padding">
+            <label for="photourl">Photo URL</label>
+            <input class="input" type="url" id="photourl" name="photourl" placeholder="https://YourPhoto.com" required>
+          </div>
         </div>
-        <div class="column padding width100">
-          <label for="photourl">Photo URL</label>
-          <input class="input" type="url" id="photourl" name="photourl" placeholder="https://YourPhoto.com" required>
-        </div>
-        <div class="column padding width100">
+
+        <div class="column-full padding">
           <label for="notes">Notes</label>
           <input class="input notes" type="textarea" id="notes" name="notes" required>
         </div>
-        <div class="column width100">
+
+        <div class="row justify-rt">
           <button type="submit" class="input button">SAVE</button>
         </div>
       </form>
+
     </div>
     </div>
 

@@ -17,15 +17,8 @@
 .column-half {
   width: 100%;
   padding: 0 0.75rem;
-}
-
-.column {
   display: flex;
   flex-direction: column;
-}
-
-.column-half {
-  width: 50%;
 }
 
 .img {
@@ -38,15 +31,20 @@
   align-items: center;
 }
 
-.width100 {
-  width: 100%;
-}
-
 @media screen and (min-width: 768px) {
   .container {
     max-width: 900px;
     flex-basis: calc(100% / 3);
   }
+
+  .column-half {
+    width: 50%;
+  }
+}
+
+.justify-rt {
+  width: 100%;
+  justify-content: flex-end;
 }
 
 @media screen and (max-width: 767px) {
