@@ -1,5 +1,6 @@
 ul {
   list-style-type: none;
+  margin: 0;
 }
 
 .hidden {
@@ -40,12 +41,20 @@ ul {
   justify-content: flex-end;
 }
 
+.sp-bw {
+  justify-content: space-between;
+}
+
+.thin-text {
+  font-weight: 100;
+}
+
 .no-padding {
   padding: 0;
 }
 
-.sp-bw {
-  justify-content: space-between;
+.fit-content {
+  width: fit-content;
 }
 
 @media screen and (min-width: 768px) {
