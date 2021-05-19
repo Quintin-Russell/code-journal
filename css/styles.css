@@ -1,0 +1,39 @@
+.heebo {
+  font-family: "Heebo", sans-serif;
+  letter-spacing: 1px;
+  color: rgb(63, 63, 63);
+}
+
+.form-header {
+  background-color: rgb(86, 21, 143);
+  color: white;
+}
+
+.form {
+  background-color: rgba(226, 226, 226, 0.692);
+}
+
+.padding {
+  padding: 0.75rem;
+}
+
+.input {
+  border-radius: 5%;
+  border: 0.25px solid rgb(136, 136, 136);
+  height: 2rem;
+}
+
+.input:focus {
+  outline-color: rgb(86, 21, 143);
+}
+
+.notes {
+  height: 150px;
+}
+
+.button {
+  background-color: rgb(86, 21, 143);
+  color: white;
+  border-radius: 10%;
+  width: 100px;
+}
