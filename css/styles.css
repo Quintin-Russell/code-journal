@@ -38,12 +38,8 @@
   width: 100px;
 }
 
-.fit-text {
-  width: fit-content;
-  max-width: 100%;
-}
-
 .new-button {
   width: 75px;
   border-radius: 15%;
+  margin: 2rem;
 }

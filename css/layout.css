@@ -3,6 +3,11 @@ ul {
   margin: 0;
 }
 
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .hidden {
   display: none !important;
 }
@@ -13,9 +18,12 @@ ul {
   padding: 0 1.5rem;
 }
 
-.row {
-  display: flex;
-  flex-wrap: wrap;
+.entries-cont {
+  height: 70rem;
+}
+
+.no-wrap {
+  flex-wrap: nowrap;
 }
 
 .column-full,
@@ -51,10 +59,6 @@ ul {
 
 .no-padding {
   padding: 0;
-}
-
-.fit-content {
-  width: fit-content;
 }
 
 @media screen and (min-width: 768px) {
