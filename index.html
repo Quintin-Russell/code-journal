@@ -13,7 +13,9 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <!--font for form titles font-family: Heebo (490 weight)-->
+  <!--font for form titles font-family: Heebo (100 & 490 weight)-->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@490&display=swap" rel="stylesheet">
 </head>
 
@@ -21,10 +23,27 @@
   <header>
   </header>
   <main>
-    <div class="container center row hidden">
-      <div data-view="entry-form">
+  <div id="page-container">
+    <div class="row form-header sp-bw heebo center">
+      <div class="container">
+      <span>Code Journal</span>
+      <nav>
+        <a data-view="nav-entries" class="thin-text">Entries</a>
+      </nav>
+    </div>
+    </div>
+    <div class="row heebo form center sp-bw">
+      <h1 class="padding">Entries</h1>
+      <button data-view="new-button" class="input new-button button">NEW</button>
+    </div>
+    <div data-view="entry-form" class="container center row">
         <div class="column-full heebo">
-          <div class="padding form-header">Code Journal</div>
+                <div class="row padding form-header sp-bw">
+                  <span>Code Journal</span>
+                  <nav>
+                    <a data-view="nav-entries" class="thin-text">Entries</a>
+                  </nav>
+                </div>
           <h1 class="padding">New Entry</h1>
 
           <form id="form" class="center form row" action="">
@@ -56,7 +75,6 @@
 
         </div>
       </div>
-    </div>
 
     <!--past entries stuff-->
     <div data-view="entries" class="container center row">
@@ -69,16 +87,6 @@
 
               <div class="heebo">
 
-                <div class="row padding form-header sp-bw">
-                  <span>Code Journal</span>
-                  <span class="thin-text">Entries</span>
-                </div>
-
-                <div class="row form center sp-bw">
-                  <h1 class="padding">Entries</h1>
-                  <button class="input new-button button">NEW</button>
-                </div>
-
                 <div class="center form row">
 
                   <div class="center column-half">
@@ -87,42 +95,20 @@
 
                   <section class="column-half heebo">
                     <h2>Good Things</h2>
-                    <p>SOmjksfdagfijsdbafijasbdfibaisdfjasdfas. asdhbfhuahasdfhu.sdjfbasdbu</p>
+                    <p>SOmjksfdagfi jsdbafijasbdfiba isdfjasdfas. asdhbfhuahas dfhu.sdjfbas dbu</p>
                   </section>
 
                 </div>
 
               </div>
 
-            </li>
-
-            <li class="center">
-              <div class="padding heebo">
-                <div class="padding form-header">Code Journal</div>
-                <div class="row center sp-bw form">
-                  <h1 class="padding">Entries</h1>
-                  <button class="input new-button button">NEW</button>
-                </div>
-
-                <div class="center form row">
-
-                  <div class="img center column-half">
-                    <img class="img" src="images/placeholder-image-square.jpg" alt="placeholder-img">
-                  </div>
-
-                  <section class="column-half heebo">
-                    <h2>Bad Things</h2>
-                    <div>SOmjgsdfgdfsgttttfijasbdfibaisdfjasdfas. asdhbfhuahasdfhu.sdjfbasdbu</div>
-                  </section>
-                </div>
-
-              </div>
             </li>
           </ul>
         </div>
 
       </div>
     </div>
+</div>
     </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>

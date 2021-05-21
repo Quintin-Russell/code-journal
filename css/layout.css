@@ -3,6 +3,11 @@ ul {
   margin: 0;
 }
 
+li {
+  width: 578px;
+  padding: 1rem;
+}
+
 .row {
   display: flex;
   flex-wrap: wrap;
@@ -64,7 +69,6 @@ ul {
 @media screen and (min-width: 768px) {
   .container {
     max-width: 900px;
-    flex-basis: calc(100% / 3);
   }
 
   .column-half {

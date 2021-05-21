@@ -50,22 +50,6 @@ function entrySetup(entry) {
   const $parentDiv = document.createElement('div');
   $parentDiv.setAttribute('class', 'heebo');
 
-  // make div w/ class="row padding form-header sp-bw": span = textContent "code journal", span w/ class="thin-text" & texContent = entries
-  const $divHeader = document.createElement('div');
-  $divHeader.setAttribute('class', 'row padding form-header sp-bw');
-  // create spans: span = textContent "code journal", span w/ class="thin-text" & texContent = entries
-  const $spanCJ = document.createElement('span');
-  const textSpanCJ = document.createTextNode('Code Journal');
-  $spanCJ.appendChild(textSpanCJ);
-
-  const $spanEntries = document.createElement('span');
-  $spanEntries.setAttribute('class', 'thin-text');
-  const textSpanEntries = document.createTextNode('Entries');
-  $spanEntries.appendChild(textSpanEntries);
-  // add spans to $divHeader
-  $divHeader.appendChild($spanCJ);
-  $divHeader.appendChild($spanEntries);
-
   // make div w/ class="row form center sp-bw": h1 w/ class="padding", textContent=Entries; button w/ class="input new-button button", textContent=NEW
   const $divEntries = document.createElement('div');
   $divEntries.setAttribute('class', 'row form center sp-bw');
@@ -76,6 +60,7 @@ function entrySetup(entry) {
   $h1Entries.appendChild(texth1Entries);
 
   const $newButton = document.createElement('button');
+  $newButton.setAttribute('data-view', 'new-button');
   $newButton.setAttribute('class', 'input new-button button');
   const textNewButton = document.createTextNode('NEW');
   $newButton.appendChild(textNewButton);
@@ -118,7 +103,6 @@ function entrySetup(entry) {
   $divContent.appendChild($sectionContent);
 
   // add elements ($divHeader,$divEntries,$divContent) to parent div
-  $parentDiv.appendChild($divHeader);
   $parentDiv.appendChild($divEntries);
   $parentDiv.appendChild($divContent);
 
@@ -132,11 +116,39 @@ function entrySetup(entry) {
   $ul.appendChild($newLi);
 
 }
-var entry = {
-  entryID: 0,
-  title: 'Test',
-  imgURL: 'https://mindyourmind.ca/sites/default/files/images/blog/CrazyAlternatives.jpg',
-  notes: 'Test Test',
-  date: 4455668
-};
-entrySetup(entry);
+
+// get entry array from local storage --> run thru entrySetup
+document.addEventListener('DOMContentLoaded', function (event) {
+  var LSEntryArray = localStorage.getItem('entryArray');
+  LSEntryArray = JSON.parse(LSEntryArray);
+  var item;
+  for (item of LSEntryArray) {
+    entrySetup(item);
+  }
+});
+
+// add event listener to any <a> that turns entry-form to hidden
+const $wholePageContainer = document.querySelector('#page-container');
+const $aTags = document.querySelectorAll("a[data-view='nav-entries']");
+const $newButtons = document.querySelectorAll('.new-button');
+const $entryForm = document.querySelector("div[data-view='entry-form']");
+const $entries = document.querySelector("div[data-view='entries']");
+$wholePageContainer.addEventListener('click', function (event) {
+  var $a;
+  for ($a of $aTags) {
+    if (event.target === $a) {
+      $entryForm.setAttribute('class', 'hidden container center row');
+      $entries.setAttribute('class', 'container center row');
+    }
+  }
+});
+// add event listener on any .new-button that turns entries to hidden
+$wholePageContainer.addEventListener('click', function (event) {
+  var $newBut;
+  for ($newBut of $newButtons) {
+    if (event.target === $newBut) {
+      $entryForm.setAttribute('class', 'container center row');
+      $entries.setAttribute('class', 'hidden container center row');
+    }
+  }
+});
