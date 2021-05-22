@@ -3,7 +3,7 @@
 
 // 1: event listener to update photo url; target: photo url input event: input
 const $photoUrlDiv = document.querySelector('#photourl').parentElement;
-const $form = document.querySelector('#form');
+var $form = document.querySelector('#form');
 
 $photoUrlDiv.addEventListener('input', function (e) {
   const $img = document.querySelector('img');
