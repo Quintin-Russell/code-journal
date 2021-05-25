@@ -1,91 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Code Journal</title>
   <link rel="icon" href="images/favicon.ico">
-  <link
-    rel="stylesheet"
-    crossorigin="anonymous"
+  <link rel="stylesheet" crossorigin="anonymous"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
     integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <!--font for form titles font-family: Heebo (490 weight)-->
+  <!--font for form titles font-family: Heebo (100 & 490 weight)-->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@490&display=swap" rel="stylesheet">
 </head>
+
 <body>
   <header>
   </header>
   <main>
-  <div class="container center row">
-    <div data-view="entry-form">
-    <div class="column-full heebo">
-    <div class="padding form-header">Code Journal</div>
-    <h1 class="padding">New Entry</h1>
-
-    <form id= "form" class="center form row" action="">
-      <div class="img center column-half">
-          <img class="img" src="images/placeholder-image-square.jpg" alt="placeholder-img">
+    <div id="page-container">
+      <div class="row form-header sp-bw heebo center">
+        <div class="container center padding row sp-bw">
+          <span>Code Journal</span>
+          <nav>
+            <a data-view="nav-entries" class="thin-text">Entries</a>
+          </nav>
+        </div>
       </div>
-
-        <div class="column-half">
-          <div class="column-full">
-            <label for="title">Title</label>
-            <input class="input" type="text" id="title" name="title" required>
-          </div>
-          <div class="column-full">
-            <label for="photourl">Photo URL</label>
-            <input class="input" type="url" id="photourl" name="photourl" placeholder="https://YourPhoto.com" required>
-          </div>
+      <div class="row heebo no-padding form center sp-bw">
+        <div class="container no-padding center row sp-bw">
+          <h1 class="padding">Entries</h1>
+          <button data-view="new-button" class="input new-button button">NEW</button>
         </div>
+      </div>
+      <div data-view="entry-form" class="hidden no-padding container center row">
+        <div class="column-full heebo">
 
-        <div class="column-full">
-          <label for="notes">Notes</label>
-          <input class="input notes" type="textarea" id="notes" name="notes" required>
-        </div>
-
-        <div class="row justify-rt">
-          <button type="submit" class="input button">SAVE</button>
-        </div>
-      </form>
-
-    </div>
-    </div>
-    </div>
-
-    <div data-view="entries" class="container center">
-      <ul class="center row no-padding">
-        <li>
-        <div class="padding heebo">
-          <div class="padding form-header">Code Journal</div>
-          <div class="row center sp-bw">
-            <h1 class="padding">Entries</h1>
-            <button class="input button">NEW</button>
-          </div>
-
-          <div class="center form row">
-
+          <form id="form" class="center form row" action="">
             <div class="img center column-half">
               <img class="img" src="images/placeholder-image-square.jpg" alt="placeholder-img">
             </div>
 
-            <section class="column-half heebo">
-              <h2>Good Things</h2>
-              <p>SOmjksfdagfijsdbafijasbdfibaisdfjasdfas. asdhbfhuahasdfhu.sdjfbasdbu</p>
-            </section>
-        </div>
+            <div class="column-half">
+              <div class="column-full">
+                <label for="title">Title</label>
+                <input class="input" type="text" id="title" name="title" required>
+              </div>
+              <div class="column-full">
+                <label for="photourl">Photo URL</label>
+                <input class="input" type="url" id="photourl" name="photourl" placeholder="https://YourPhoto.com"
+                  required>
+              </div>
+            </div>
+
+            <div class="column-full">
+              <label for="notes">Notes</label>
+              <input class="input notes" type="textarea" id="notes" name="notes" required>
+            </div>
+
+            <div class="row justify-rt">
+              <button type="submit" class="input button">SAVE</button>
+            </div>
+          </form>
 
         </div>
-        </li>
-      </ul>
+      </div>
 
+      <!--past entries stuff-->
+      <div data-view="entries" class="container center row">
+        <div class="row">
+          <!--column : past journal entries-->
+          <div class="column-full heebo">
+
+            <ul data-view="ul" class="column-full no-padding center">
+            </ul>
+          </div>
+
+        </div>
+      </div>
     </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
+
 </html>
