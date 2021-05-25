@@ -1,10 +1,11 @@
 /* global data */
 /* exported data */
 
-/* const $ul = document.querySelector('ul');
+const $ul = document.querySelector('ul');
 const $form = document.querySelector('#form');
 const $img = document.querySelector('img');
-// const entryArray = previousData.entries;
+// eslint-disable-next-line no-undef
+const entryArray = previousData.entries;
 
 // function creating DOM objs from journal entries
 function entrySetup(entry) {
@@ -164,4 +165,4 @@ $wholePageContainer.addEventListener('click', function (event) {
 $form.addEventListener('submit', function (event) {
   $entryForm.setAttribute('class', 'hidden container center row');
   $entries.setAttribute('class', 'container center row');
-}); */
+});

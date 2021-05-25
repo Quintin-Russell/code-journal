@@ -7,8 +7,9 @@ var data = {
   nextEntryId: 1
 };
 
-// let previousData = localStorage.getItem('data');
-// previousData = JSON.parse(previousData);
+var previousData = localStorage.getItem('data');
+// eslint-disable-next-line no-unused-vars
+previousData = JSON.parse(previousData);
 
 window.addEventListener('beforeunload', function (event) {
   const dataJSON = JSON.stringify(data);
