@@ -1,5 +1,15 @@
 ul {
   list-style-type: none;
+  margin: 0;
+}
+
+li {
+  padding: 1rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .hidden {
@@ -7,14 +17,12 @@ ul {
 }
 
 .container {
-  width: 576px;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
 
-.row {
-  display: flex;
-  flex-wrap: wrap;
+.no-wrap {
+  flex-wrap: nowrap;
 }
 
 .column-full,
@@ -40,18 +48,31 @@ ul {
   justify-content: flex-end;
 }
 
+.sp-bw {
+  justify-content: space-between;
+}
+
+.thin-text {
+  font-weight: 100;
+}
+
 .no-padding {
   padding: 0;
 }
 
-.sp-bw {
-  justify-content: space-between;
+.edit-a {
+  justify-content: end;
+  width: 30px;
+}
+
+.no-margin {
+  margin: 0;
 }
 
 @media screen and (min-width: 768px) {
   .container {
     max-width: 900px;
-    flex-basis: calc(100% / 3);
+    width: 90%;
   }
 
   .column-half {
