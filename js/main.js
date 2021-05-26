@@ -10,8 +10,6 @@ const $newButtons = document.querySelectorAll('.new-button');
 const $entryForm = document.querySelector("div[data-view='entry-form']");
 const $entries = document.querySelector("div[data-view='entries']");
 const $photoUrlDiv = document.querySelector('#photourl').parentElement;
-// eslint-disable-next-line no-undef
-var entryArray = previousData.entries;
 
 // function creating DOM objs from journal entries
 function entrySetup(entry) {
@@ -91,9 +89,9 @@ function showEntries() {
 }
 // get entry array from local storage --> run thru entrySetup
 document.addEventListener('DOMContentLoaded', function (event) {
-  if (entryArray.length > 0) {
+  if (data.entries.length > 0) {
     var item;
-    for (item of entryArray) {
+    for (item of data.entries) {
       const $li = entrySetup(item);
       $ul.appendChild($li);
     }
@@ -122,27 +120,47 @@ $form.addEventListener('submit', function (event) {
     const $liNoEntry = document.querySelector('#no-entry');
     $liNoEntry.remove();
   }
-
   // put forms entries into new obj
   const $title = $form.elements.title.value;
   const $imgUrl = $img.getAttribute('src');
   const $text = $form.elements.notes.value;
   let entrynum = data.nextEntryId;
+  // if data.editing != null --> access entryArray and data.entries entryID and update title, imgURL and notes
+  // --> reset data.editing to null
+  if (data.editing != null) {
+    const editObj = data.editing;
+    editObj.title = $form.elements.title.value;
+    editObj.imgURL = $imgUrl;
+    editObj.notes = $text;
+    // eslint-disable-next-line prefer-const
+    let entryNum = data.editing.entryID;
+    let item;
+    for (item of data.entries) {
+      if (item.entryID === entryNum) {
+        item = editObj;
+      }
+    }
+    data.editing = null;
+  } else {
+    const entry = {
+      entryID: entrynum,
+      title: $title,
+      imgURL: $imgUrl,
+      notes: $text
+    };
+    data.entries.unshift(entry);
+    // make DOM object for new entry and prepend to $ul
+    const $li = entrySetup(entry);
+    $ul.prepend($li);
+    // incriment nextEntryId
+    entrynum++;
+    data.nextEntryId = entrynum;
+  }
+  // let item;
+  // for (item of data.entries) {
+  // const $newLi = entrySetup(item);
 
-  const entry = {
-    entryID: entrynum,
-    title: $title,
-    imgURL: $imgUrl,
-    notes: $text
-  };
-  entryArray.unshift(entry);
-  // make DOM object for new entry and prepend to $ul
-  const $li = entrySetup(entry);
-  $ul.prepend($li);
-  // incriment nextEntryId
-  entrynum++;
-  data.nextEntryId = entrynum;
-  // reset img src att & form input
+  // }
   $img.setAttribute('src', 'images/placeholder-image-square.jpg');
   $form.reset();
 });
@@ -189,18 +207,32 @@ $ul.addEventListener('click', function (event) {
   for (i of $iList) {
     if (i === event.target) {
       showNewForm();
-      // console.log(entryArray);
       const $targetLi = event.target.closest('li');
-      const entryNum = $targetLi.getAttribute('data-entry-id');
+      let entryNum = $targetLi.getAttribute('data-entry-id');
+      entryNum = parseInt(entryNum);
       // search thru entriesArray for obj w/ entryID=entryNum and set = to data.editing
-      for (let i = 0; i < entryArray.length; i++) {
-        // console.log('entryArray[i].entryID', entryArray[i].entryID);
-        // console.log('entryNum', entryNum);
-        if (entryArray[i].entryID === entryNum) {
-          data.editing = entryArray[i];
-          // console.log('data', data);
+      for (let i = 0; i < data.entries.length; i++) {
+        if (data.entries[i].entryID === entryNum) {
+          const editObj = data.entries[i];
+          data.editing = editObj;
+          break;
         }
       }
+      // add the ___.value to the entry form
+      const editObj = data.editing;
+      // select form objs
+      const $imgUrl = document.querySelector('#photourl');
+      const $title = $form.elements.title;
+      const $text = $form.elements.notes;
+      // select values from editObj
+      const objtitle = editObj.title;
+      const objimgUrl = editObj.imgURL;
+      const objtext = editObj.notes;
+      // set form ctrls to obj values
+      $title.value = objtitle;
+      $imgUrl.value = objimgUrl;
+      $img.setAttribute('src', objimgUrl);
+      $text.value = objtext;
     }
   }
 });
