@@ -1,3 +1,7 @@
+a:hover {
+  cursor: pointer;
+}
+
 .heebo {
   font-family: "Heebo", sans-serif;
   letter-spacing: 1px;
@@ -36,4 +40,14 @@
   color: white;
   border-radius: 10%;
   width: 100px;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.new-button {
+  width: 75px;
+  border-radius: 15%;
+  margin: 2rem;
 }

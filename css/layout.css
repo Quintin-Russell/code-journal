@@ -1,5 +1,16 @@
 ul {
   list-style-type: none;
+  margin: 0;
+}
+
+li {
+  width: 578px;
+  padding: 1rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .hidden {
@@ -12,9 +23,12 @@ ul {
   padding: 0 1.5rem;
 }
 
-.row {
-  display: flex;
-  flex-wrap: wrap;
+.entries-cont {
+  height: 70rem;
+}
+
+.no-wrap {
+  flex-wrap: nowrap;
 }
 
 .column-full,
@@ -38,6 +52,14 @@ ul {
 .justify-rt {
   width: 100%;
   justify-content: flex-end;
+}
+
+.sp-bw {
+  justify-content: space-between;
+}
+
+.thin-text {
+  font-weight: 100;
 }
 
 .no-padding {

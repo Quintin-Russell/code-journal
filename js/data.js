@@ -6,3 +6,12 @@ var data = {
   editing: null,
   nextEntryId: 1
 };
+
+var previousData = localStorage.getItem('data');
+// eslint-disable-next-line no-unused-vars
+previousData = JSON.parse(previousData);
+
+window.addEventListener('beforeunload', function (event) {
+  const dataJSON = JSON.stringify(data);
+  localStorage.setItem('data', dataJSON);
+});
