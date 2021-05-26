@@ -95,11 +95,28 @@ $form.addEventListener('submit', function (event) {
     $liNoEntry.remove();
   }
 
+var entryArray = [];
+var entrynum = 0;
+// 1: event listener to update photo url; target: photo url input event: input
+const $photoUrlDiv = document.querySelector('#photourl').parentElement;
+const $img = document.querySelector('img');
+$photoUrlDiv.addEventListener('input', function (e) {
+  e.preventDefault();
+  const $newURL = event.target.value;
+  $img.setAttribute('src', $newURL);
+});
+
+// 2: event listener to 'submit' button; target: submit button, type: click
+const $form = document.querySelector('#form');
+
+$form.addEventListener('submit', function (event) {
+  event.preventDefault();
   // put forms entries into new obj
   const $title = $form.elements.title.value;
   const $imgUrl = $img.getAttribute('src');
   const $text = $form.elements.notes.value;
   const $date = Date.now();
+
   let entrynum = data.nextEntryId;
 
   var entry = {
@@ -109,6 +126,7 @@ $form.addEventListener('submit', function (event) {
     notes: $text,
     date: $date
   };
+
   const entryArray = data.entries;
   entryArray.unshift(entry);
   // make DOM object for new entry and prepend to $ul
@@ -117,6 +135,14 @@ $form.addEventListener('submit', function (event) {
   // incriment nextEntryId
   entrynum++;
   data.nextEntryId = entrynum;
+
+  entryArray.unshift(entry);
+  // incriment nextEntryId
+  entrynum++;
+  // save entryArray to localStorage
+  var entryArrayStr = JSON.stringify(entryArray);
+  localStorage.setItem('entryArray', entryArrayStr);
+
   // reset img src att & form input
   $img.setAttribute('src', 'images/placeholder-image-square.jpg');
   $form.reset();
