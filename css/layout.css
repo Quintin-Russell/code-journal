@@ -5,6 +5,7 @@ ul {
 
 li {
   padding: 1rem;
+  min-width: 828px;
 }
 
 .row {
