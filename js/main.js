@@ -10,6 +10,11 @@ const $newButtons = document.querySelectorAll('.new-button');
 const $entryForm = document.querySelector("div[data-view='entry-form']");
 const $entries = document.querySelector("div[data-view='entries']");
 const $photoUrlDiv = document.querySelector('#photourl').parentElement;
+const $popUp = document.querySelector('.overlay');
+const $delCancelButton = document.querySelector('.cancel-button');
+const $delConfirmButton = document.querySelector('.confirm-button');
+// eslint-disable-next-line no-unused-vars
+let $delete;
 
 // function creating DOM objs from journal entries
 function entrySetup(entry) {
@@ -86,6 +91,8 @@ function showNewForm() {
 function showEntries() {
   $entryForm.setAttribute('class', 'hidden container center row');
   $entries.setAttribute('class', 'container center row');
+  $img.setAttribute('src', 'images/placeholder-image-square.jpg');
+  $form.reset();
 }
 // get entry array from local storage --> run thru entrySetup
 document.addEventListener('DOMContentLoaded', function (event) {
@@ -213,19 +220,37 @@ $ul.addEventListener('click', function (event) {
   for (i of $iList) {
     if (i === event.target) {
       showNewForm();
+      // add delete <a> to bottom od newForm, next to save button
+      const $submitButton = document.querySelector("button[type='submit']");
+      const $submitDiv = $submitButton.closest('div');
+      let $aDelete;
+      if (!document.querySelector('.delete')) {
+        $aDelete = document.createElement('a');
+        $aDelete.setAttribute('class', 'delete');
+        const aDeleteText = document.createTextNode('Delete Entry');
+        $aDelete.appendChild(aDeleteText);
+        $submitDiv.insertBefore($aDelete, $submitButton);
+        $submitDiv.setAttribute('class', 'row center no-padding container sp-bw');
+      } else {
+        $aDelete = document.querySelector('.delete');
+      }
+
+      $aDelete.addEventListener('click', function (e) {
+        $popUp.setAttribute('class', 'flex overlay');
+      });
+
       const $targetLi = event.target.closest('li');
       let entryNum = $targetLi.getAttribute('data-entry-id');
       entryNum = parseInt(entryNum);
+      let editObj;
       // search thru entriesArray for obj w/ entryID=entryNum and set = to data.editing
       for (let i = 0; i < data.entries.length; i++) {
         if (data.entries[i].entryID === entryNum) {
-          const editObj = data.entries[i];
+          editObj = data.entries[i];
           data.editing = editObj;
           break;
         }
       }
-      // add the ___.value to the entry form
-      const editObj = data.editing;
       // select form objs
       const $imgUrl = document.querySelector('#photourl');
       const $title = $form.elements.title;
@@ -241,4 +266,37 @@ $ul.addEventListener('click', function (event) {
       $text.value = objtext;
     }
   }
+});
+
+// add event listenr to confrim button that removes entry from
+// data obj and DOM tree and shows the entries page
+$delConfirmButton.addEventListener('click', function (e) {
+  // remove entry from data obj and clear data.editing
+  const deleteNum = data.editing.entryID;
+  let item;
+  for (item of data.entries) {
+    let counter = 0;
+    if (item.entryID === deleteNum) {
+      data.entries.splice(counter, 1);
+      data.editing = null;
+      break;
+    }
+    counter++;
+  }
+  // remove from DOM tree
+  const $liList = document.querySelectorAll('li');
+  for (item of $liList) {
+    let liId = item.getAttribute('data-entry-id');
+    liId = parseInt(liId);
+    if (liId === deleteNum) {
+      $ul.removeChild(item);
+      showEntries();
+    }
+  }
+  $popUp.setAttribute('class', 'hidden overlay');
+});
+
+// add event listener to cancel button that hides modal
+$delCancelButton.addEventListener('click', function (e) {
+  $popUp.setAttribute('class', 'hidden overlay');
 });

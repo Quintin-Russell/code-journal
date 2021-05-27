@@ -51,3 +51,59 @@ a:hover {
   border-radius: 15%;
   margin: 2rem;
 }
+
+.edit-icon {
+  color: rgb(86, 21, 143);
+}
+
+.delete {
+  color: red;
+  text-decoration: underline;
+}
+
+.thin-text {
+  font-weight: 100;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.61);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: inherit;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-box {
+  display: inherit;
+  flex-direction: column;
+  background-color: white;
+  height: 33%;
+  width: 70%;
+  align-items: center;
+  font-family: "heebo", sans-serif;
+  justify-content: center;
+  text-align: center;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.cancel-button {
+  width: 35%;
+  padding: 1rem;
+  margin: 1rem;
+  height: 4rem;
+  background-color: rgba(126, 128, 129);
+  font-size: 1.75rem;
+}
+
+.confirm-button {
+  background-color: rgb(219, 64, 44);
+}
