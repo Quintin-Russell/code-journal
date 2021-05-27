@@ -138,6 +138,18 @@ $form.addEventListener('submit', function (event) {
     for (item of data.entries) {
       if (item.entryID === entryNum) {
         item = editObj;
+        break;
+      }
+    }
+    const $liList = document.querySelectorAll('li');
+    for (item of $liList) {
+      let liId = item.getAttribute('data-entry-id');
+      liId = parseInt(liId);
+      if (liId === editObj.entryID) {
+        const $newLi = entrySetup(editObj);
+        $ul.insertBefore($newLi, item);
+        $ul.removeChild(item);
+        break;
       }
     }
     data.editing = null;
@@ -149,18 +161,12 @@ $form.addEventListener('submit', function (event) {
       notes: $text
     };
     data.entries.unshift(entry);
-    // make DOM object for new entry and prepend to $ul
-    const $li = entrySetup(entry);
-    $ul.prepend($li);
+    const $newLi = entrySetup(entry);
+    $ul.prepend($newLi);
     // incriment nextEntryId
     entrynum++;
     data.nextEntryId = entrynum;
   }
-  // let item;
-  // for (item of data.entries) {
-  // const $newLi = entrySetup(item);
-
-  // }
   $img.setAttribute('src', 'images/placeholder-image-square.jpg');
   $form.reset();
 });
