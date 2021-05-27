@@ -4,8 +4,12 @@
 const $ul = document.querySelector('ul');
 const $form = document.querySelector('#form');
 const $img = document.querySelector('img');
-// eslint-disable-next-line no-undef
-const entryArray = previousData.entries;
+const $wholePageContainer = document.querySelector('#page-container');
+const $aTags = document.querySelectorAll("a[data-view='nav-entries']");
+const $newButtons = document.querySelectorAll('.new-button');
+const $entryForm = document.querySelector("div[data-view='entry-form']");
+const $entries = document.querySelector("div[data-view='entries']");
+const $photoUrlDiv = document.querySelector('#photourl').parentElement;
 
 // function creating DOM objs from journal entries
 function entrySetup(entry) {
@@ -35,11 +39,24 @@ function entrySetup(entry) {
   // add section w/ class="column-half heebo": h2 textContent = entry.title & div w/ textContent= entry.notes
   const $sectionContent = document.createElement('section');
   $sectionContent.setAttribute('class', 'column-half heebo');
-  // create and add h2 textContent = entry.title & div w/ textContent= entry.notes
+  // create and add (div w/ h2 textContent = entry.title & <i class= "pen">) & div w/ textContent= entry.notes
+  const $divJournalEdit = document.createElement('div');
+  $divJournalEdit.setAttribute('class', 'row center sp-bw no-wrap');
+
   const $h2SectionContent = document.createElement('h2');
+  $h2SectionContent.setAttribute('class', 'column-half');
   const texth2SC = document.createTextNode(entry.title);
   $h2SectionContent.appendChild(texth2SC);
-  $sectionContent.appendChild($h2SectionContent);
+  $divJournalEdit.appendChild($h2SectionContent);
+
+  const Aedit = document.createElement('a');
+  Aedit.setAttribute('class', 'edit-a');
+  const iEdit = document.createElement('i');
+  iEdit.setAttribute('class', 'fa fa-pen fa-2x edit-icon');
+  Aedit.appendChild(iEdit);
+  $divJournalEdit.appendChild(Aedit);
+
+  $sectionContent.appendChild($divJournalEdit);
 
   const $pNotes = document.createElement('p');
   const textPNotes = document.createTextNode(entry.notes);
@@ -55,17 +72,26 @@ function entrySetup(entry) {
 
   // add all elements to li w/ class="center"
   const $newLi = document.createElement('li');
-
+  $newLi.setAttribute('data-entry-id', entry.entryID);
   $newLi.setAttribute('class', 'center');
   $newLi.appendChild($parentDiv);
   return $newLi;
 }
 
+function showNewForm() {
+  $entryForm.setAttribute('class', 'container center row');
+  $entries.setAttribute('class', 'hidden container center row');
+}
+
+function showEntries() {
+  $entryForm.setAttribute('class', 'hidden container center row');
+  $entries.setAttribute('class', 'container center row');
+}
 // get entry array from local storage --> run thru entrySetup
 document.addEventListener('DOMContentLoaded', function (event) {
-  if (entryArray.length > 0) {
+  if (data.entries.length > 0) {
     var item;
-    for (item of entryArray) {
+    for (item of data.entries) {
       const $li = entrySetup(item);
       $ul.appendChild($li);
     }
@@ -94,62 +120,56 @@ $form.addEventListener('submit', function (event) {
     const $liNoEntry = document.querySelector('#no-entry');
     $liNoEntry.remove();
   }
-
-var entryArray = [];
-var entrynum = 0;
-// 1: event listener to update photo url; target: photo url input event: input
-const $photoUrlDiv = document.querySelector('#photourl').parentElement;
-const $img = document.querySelector('img');
-$photoUrlDiv.addEventListener('input', function (e) {
-  e.preventDefault();
-  const $newURL = event.target.value;
-  $img.setAttribute('src', $newURL);
-});
-
-// 2: event listener to 'submit' button; target: submit button, type: click
-const $form = document.querySelector('#form');
-
-$form.addEventListener('submit', function (event) {
-  event.preventDefault();
   // put forms entries into new obj
   const $title = $form.elements.title.value;
   const $imgUrl = $img.getAttribute('src');
   const $text = $form.elements.notes.value;
-  const $date = Date.now();
-
   let entrynum = data.nextEntryId;
-
-  var entry = {
-    entryID: entrynum,
-    title: $title,
-    imgURL: $imgUrl,
-    notes: $text,
-    date: $date
-  };
-
-  const entryArray = data.entries;
-  entryArray.unshift(entry);
-  // make DOM object for new entry and prepend to $ul
-  const $li = entrySetup(entry);
-  $ul.prepend($li);
-  // incriment nextEntryId
-  entrynum++;
-  data.nextEntryId = entrynum;
-
-  entryArray.unshift(entry);
-  // incriment nextEntryId
-  entrynum++;
-  // save entryArray to localStorage
-  var entryArrayStr = JSON.stringify(entryArray);
-  localStorage.setItem('entryArray', entryArrayStr);
-
-  // reset img src att & form input
+  // if data.editing != null --> access entryArray and data.entries entryID and update title, imgURL and notes
+  // --> reset data.editing to null
+  if (data.editing != null) {
+    const editObj = data.editing;
+    editObj.title = $form.elements.title.value;
+    editObj.imgURL = $imgUrl;
+    editObj.notes = $text;
+    // eslint-disable-next-line prefer-const
+    let entryNum = data.editing.entryID;
+    let item;
+    for (item of data.entries) {
+      if (item.entryID === entryNum) {
+        item = editObj;
+        break;
+      }
+    }
+    const $liList = document.querySelectorAll('li');
+    for (item of $liList) {
+      let liId = item.getAttribute('data-entry-id');
+      liId = parseInt(liId);
+      if (liId === editObj.entryID) {
+        const $newLi = entrySetup(editObj);
+        $ul.insertBefore($newLi, item);
+        $ul.removeChild(item);
+        break;
+      }
+    }
+    data.editing = null;
+  } else {
+    const entry = {
+      entryID: entrynum,
+      title: $title,
+      imgURL: $imgUrl,
+      notes: $text
+    };
+    data.entries.unshift(entry);
+    const $newLi = entrySetup(entry);
+    $ul.prepend($newLi);
+    // incriment nextEntryId
+    entrynum++;
+    data.nextEntryId = entrynum;
+  }
   $img.setAttribute('src', 'images/placeholder-image-square.jpg');
   $form.reset();
 });
-
-const $photoUrlDiv = document.querySelector('#photourl').parentElement;
-// const $form = document.querySelector('#form');
 
 // 1: event listener to update photo url; target: photo url input event: inpu
 $photoUrlDiv.addEventListener('input', function (e) {
@@ -160,17 +180,11 @@ $photoUrlDiv.addEventListener('input', function (e) {
 });
 
 // add event listener to any <a> that turns entry-form to hidden
-const $wholePageContainer = document.querySelector('#page-container');
-const $aTags = document.querySelectorAll("a[data-view='nav-entries']");
-const $newButtons = document.querySelectorAll('.new-button');
-const $entryForm = document.querySelector("div[data-view='entry-form']");
-const $entries = document.querySelector("div[data-view='entries']");
 $wholePageContainer.addEventListener('click', function (event) {
   var $a;
   for ($a of $aTags) {
     if (event.target === $a) {
-      $entryForm.setAttribute('class', 'hidden container center row');
-      $entries.setAttribute('class', 'container center row');
+      showEntries();
     }
   }
 });
@@ -179,8 +193,7 @@ $wholePageContainer.addEventListener('click', function (event) {
   var $newBut;
   for ($newBut of $newButtons) {
     if (event.target === $newBut) {
-      $entryForm.setAttribute('class', 'container center row');
-      $entries.setAttribute('class', 'hidden container center row');
+      showNewForm();
     }
   }
 });
@@ -189,6 +202,43 @@ $wholePageContainer.addEventListener('click', function (event) {
 // target: button[type='submit']
 
 $form.addEventListener('submit', function (event) {
-  $entryForm.setAttribute('class', 'hidden container center row');
-  $entries.setAttribute('class', 'container center row');
+  showEntries();
+});
+
+// event listener on $ul: event= click, function: shows id of entry if edit <a> clicked
+$ul.addEventListener('click', function (event) {
+  // select for all <i> icons
+  const $iList = document.querySelectorAll('i');
+  let i;
+  for (i of $iList) {
+    if (i === event.target) {
+      showNewForm();
+      const $targetLi = event.target.closest('li');
+      let entryNum = $targetLi.getAttribute('data-entry-id');
+      entryNum = parseInt(entryNum);
+      // search thru entriesArray for obj w/ entryID=entryNum and set = to data.editing
+      for (let i = 0; i < data.entries.length; i++) {
+        if (data.entries[i].entryID === entryNum) {
+          const editObj = data.entries[i];
+          data.editing = editObj;
+          break;
+        }
+      }
+      // add the ___.value to the entry form
+      const editObj = data.editing;
+      // select form objs
+      const $imgUrl = document.querySelector('#photourl');
+      const $title = $form.elements.title;
+      const $text = $form.elements.notes;
+      // select values from editObj
+      const objtitle = editObj.title;
+      const objimgUrl = editObj.imgURL;
+      const objtext = editObj.notes;
+      // set form ctrls to obj values
+      $title.value = objtitle;
+      $imgUrl.value = objimgUrl;
+      $img.setAttribute('src', objimgUrl);
+      $text.value = objtext;
+    }
+  }
 });
