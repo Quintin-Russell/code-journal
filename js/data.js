@@ -9,7 +9,9 @@ var data = {
 
 var previousData = localStorage.getItem('data');
 // eslint-disable-next-line no-unused-vars
-previousData = JSON.parse(previousData);
+if (previousData != null) {
+  data = JSON.parse(previousData);
+}
 
 window.addEventListener('beforeunload', function (event) {
   const dataJSON = JSON.stringify(data);

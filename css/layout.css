@@ -4,8 +4,8 @@ ul {
 }
 
 li {
-  width: 578px;
   padding: 1rem;
+  min-width: 828px;
 }
 
 .row {
@@ -18,13 +18,8 @@ li {
 }
 
 .container {
-  width: 576px;
   margin: 0 auto;
   padding: 0 1.5rem;
-}
-
-.entries-cont {
-  height: 70rem;
 }
 
 .no-wrap {
@@ -58,22 +53,23 @@ li {
   justify-content: space-between;
 }
 
-.thin-text {
-  font-weight: 100;
-}
-
 .no-padding {
   padding: 0;
 }
 
-.sp-bw {
-  justify-content: space-between;
+.edit-a {
+  justify-content: end;
+  width: 30px;
+}
+
+.no-margin {
+  margin: 0;
 }
 
 @media screen and (min-width: 768px) {
   .container {
     max-width: 900px;
-    flex-basis: calc(100% / 3);
+    width: 90%;
   }
 
   .column-half {
